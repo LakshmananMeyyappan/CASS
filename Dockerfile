@@ -1,5 +1,10 @@
-FROM ubuntu
-RUN apt-get install -y apache2 && apt-get clean
-RUN echo “Hello Apache server on Ubuntu Docker” > /var/www/html/index.html
-EXPOSE 80
-CMD apachectl -D FOREGROUND
+# base image
+FROM node:9.4
+# set working directory
+WORKDIR /
+# install and cache app dependencies
+COPY . .
+# Specify port
+EXPOSE 3000
+# start app
+CMD ["npm", "start"]
